@@ -1,6 +1,6 @@
 import Model from "./utils/Model";
 
-class Habit extends Model {
+export default class Habit extends Model {
     private lastChecked: Date | null = null;
     private  durationTranslation = {
         daily: 1,

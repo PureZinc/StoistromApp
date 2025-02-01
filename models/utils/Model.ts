@@ -7,4 +7,6 @@ export default class Model {
         const data = JSON.parse(json);
         return Object.assign(new this(), data);
     }
+
+    save() {}
 }

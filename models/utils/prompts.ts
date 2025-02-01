@@ -1,4 +1,4 @@
-function RandomPromptGenerator(): string {
+function randomPromptGenerator(): string {
     const prompts = ['How was your day?',
            'What are your plans for today?',
            'Imagine you woke up 5 years ago. How would your life change?',
@@ -45,4 +45,4 @@ function RandomPromptGenerator(): string {
     return ranPrompt;
 }
 
-export default RandomPromptGenerator;
+export default randomPromptGenerator;
