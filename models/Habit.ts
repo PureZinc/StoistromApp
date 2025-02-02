@@ -53,12 +53,20 @@ export default class Habit extends Model {
         }
     }
 
-    daysSinceLastOccurrence(): number {
+    private daysSinceLastOccurrence(): number {
         if (!this.lastChecked) return this.getDaysBetween(this.startDate, new Date());
         return this.getDaysBetween(this.lastChecked, new Date());
     }
 
     hasAvoidedFor(duration: number): boolean {
         return this.daysSinceLastOccurrence() >= duration;
+    }
+
+    getStreak(): number {
+        if (!this.isGood) {
+            return this.daysSinceLastOccurrence();
+        } else {
+            return 5 // This will be actual streak later
+        }
     }
 }

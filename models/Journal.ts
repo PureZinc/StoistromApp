@@ -2,18 +2,18 @@ import Model from "./utils/Model";
 import randomPromptGenerator from "./utils/prompts";
 
 
-type JournalTypeNames = 'EmptyPage' | 'RandomPrompt'
+export type JournalTypeNames = 'EmptyPage' | 'RandomPrompt'
 interface JournalTypeDetails {
     name: JournalTypeNames
     description: string
-    promptGenerator: () => string[] | null
+    promptGenerator: () => string[]
 }
 
 const allJournalTypes: JournalTypeDetails[] = [
     {
         name: 'EmptyPage',
         description: 'Gives you a free page to write about',
-        promptGenerator: () => null
+        promptGenerator: () => ["empty"]
     },
     {
         name: 'RandomPrompt',

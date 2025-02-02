@@ -1,32 +1,20 @@
 import { useState } from 'react';
 import styles from "../styles";
 import { Text, View, TextInput, TouchableOpacity, TouchableWithoutFeedback, Keyboard } from 'react-native';
-import RandomPromptGenerator from "../Utils/prompts";
+import Journal from '../../models/Journal';
 
 
-const journals = {
-    emptyPage: {
-        name: "Empty Page",
-        prompts: ["empty"]
-    },
-    randomPrompt: {
-        name: "Random Prompt",
-        prompts: []
-    },
-    habitRelapse: {
-        name: "Habit Relapse",
-        prompts: ["What made you do habit again?", "How can you prevent it for next time?"]
-    },
-}
+const journals = Journal.getAllJournalTypes();
+
 
 const JournalingScreen = ({route}) => {
     const { journalType } = route.params;
-    const journal = journals[journalType];
+    const journal = journals.find(type => type.name === journalType);
     if (!journal) {
         return <Text>Journal type not found.</Text>;
     }
 
-    const prompts = journalType === 'randomPrompt' ? [RandomPromptGenerator()] : journal.prompts;
+    const prompts = journal.promptGenerator();
 
     const [pageData, setPageData] = useState([]);
     const handleChange = (prompt, entry) => {

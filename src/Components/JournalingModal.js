@@ -1,8 +1,9 @@
 import { Text, View, Modal, TouchableOpacity, StyleSheet } from 'react-native';
+import Journal from '../../models/Journal';
 
-const JournalingModal = ({visible, onClose, navigation}) => {
-    emptyPage = {journalType: "Empty Page"};
-    randomPrompt = {journalType: "Random Prompt"};
+
+const JournalingModal = ({ visible, onClose, navigation }) => {
+    const journalTypes = Journal.getAllJournalTypes();
 
     return (
         <Modal
@@ -16,16 +17,13 @@ const JournalingModal = ({visible, onClose, navigation}) => {
                     <Text style={style.buttonText}>\/</Text>
                 </TouchableOpacity>
                 <View>
-                    <View>
-                        <TouchableOpacity style={style.button} onPress={() => {navigation.navigate("Journaling", {journalType: "emptyPage"}), onClose()}}>
-                            <Text style={style.buttonText}>Empty Page</Text>
-                        </TouchableOpacity>
-                    </View>
-                    <View>
-                        <TouchableOpacity style={style.button} onPress={() => {navigation.navigate("Journaling", {journalType: "randomPrompt"}), onClose()}}>
-                            <Text style={style.buttonText}>Random Prompt</Text>
-                        </TouchableOpacity>
-                    </View>
+                    {journalTypes.map((type, index) => {
+                        <View>
+                            <TouchableOpacity key={index} style={style.button} onPress={() => {navigation.navigate("Journaling", {journalType: type.name}), onClose()}}>
+                                <Text style={style.buttonText}>{type.name}</Text>
+                            </TouchableOpacity>
+                        </View>
+                    })}
                 </View>
             </View>
         </Modal>
